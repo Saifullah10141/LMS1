@@ -43,15 +43,17 @@
         let btn = document.getElementsByClassName("btn-primary")[0];
         let form = document.getElementById("Form");
 
-        btn.addEventListener("click", ()=>{
+        btn.addEventListener("click",
+            ()=>{
             form.action = "";
+            if(document.getElementById("exampleInputPassword1").value == "03097171127"){
             let role = document.getElementById("Role").value;
             if (role === "Student") form.action = "student/dashboard.html";
             else if (role === "Teacher") form.action = "teacher/dashboard.html";
             else if (role === "Course Coordinator") form.action = "course_coordinator/dashboard.html";
             else if (role === "LMS Manager") form.action = "lms_manager/dashboard.html";
             else form.action = "admin/dashboard.html";
-        })
+        }else alert("Incorrect Email or Password")});
     </script>
 </body>
 </html>
