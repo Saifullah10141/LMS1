@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - Enroll Subjects</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .header {
+            background-color: #2980b9;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        body {
+            display: flex;
+            height: 100vh;
+            background-color: white;
+            color: #000;
+            font-family: Arial, sans-serif;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #003366;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #004080;
+            text-align: center;
+            border-radius: 5px;
+        }
+        .sidebar a:hover {
+            background-color: #0066cc;
+        }
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #000;
+        }
+        .subject-list {
+            list-style: none;
+        }
+        .subject-list li {
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .subject-list li:hover {
+            background-color: #ddd;
+        }
+    </style>
+    <script>
+        function openCourseContent(subject) {
+            window.location.href = `course_content.html?subject=${encodeURIComponent(subject)}`;
+        }
+    </script>
+</head>
+<body>
+    <div class="sidebar">
+           <a href="dashboard.html">Dashboard</a>
+        <a href="enroll_subjects.html">Enrolled Subjects</a>
+        <a href="assignment.html">Assignment</a>
+        <a href="quiz.html">Quiz</a>
+        <a href="contact_us.html">Contact Us</a>
+        <a href="logout.html">Logout</a>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <h2>Welcome, <span id="username">[Student Name]</span>!</h2>
+        </div>
+        <h1>Enrolled Subjects</h1>
+        <ul class="subject-list">
+            <li onclick="openCourseContent('Mathematics')">Mathematics</li>
+            <li onclick="openCourseContent('Physics')">Physics</li>
+            <li onclick="openCourseContent('Computer Science')">Computer Science</li>
+            <li onclick="openCourseContent('English Literature')">English Literature</li>
+            <li onclick="openCourseContent('History')">History</li>
+        </ul>
+    </div>
+</body>
+</html>
