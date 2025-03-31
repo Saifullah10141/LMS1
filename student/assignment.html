@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignments</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            background-color: white;
+            color: black;
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            background-color: #2980b9;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #003366; /* Dark blue sidebar */
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #004080; /* Blue color for links */
+            text-align: center;
+            border-radius: 5px;
+        }
+        .sidebar a:hover {
+            background-color: #0066cc; /* Lighter blue on hover */
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        #btn {
+            color: white;
+            background-color: #2980b9; /* Changed to blue */
+            text-decoration-line: none;
+            padding: 6px;
+            border-radius: 10px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+           <a href="dashboard.html">Dashboard</a>
+        <a href="enroll_subjects.html">Enrolled Subjects</a>
+        <a href="student/assignment.html">Assignment</a>
+        <a href="student/quiz.html">Quiz</a>
+        <a href="contact_us.html">Contact Us</a>
+        <a href="logout.html">Logout</a>
+    </div>
+
+    <div class="content">
+        <div class="header">
+            <h2>Welcome, <span id="username">[Student Name]</span>!</h2>
+        </div>
+            <h3>Pending Assignments</h3>
+            <table>
+                <tr>
+                    <th>Title</th>
+                    <th>Due Date</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td>Math Assignment 1</td>
+                    <td>March 30, 2025</td>
+                    <td><a href="submit_assignment.html?title=Math%20Assignment%201" id="btn">Open</a></td>
+                </tr>
+            </table>
+
+            <br>
+
+            <h3>Submitted Assignments</h3>
+            <table>
+                <tr>
+                    <th>Title</th>
+                    <th>Submitted On</th>
+                    <th>Status</th>
+                </tr>
+                <tr>
+                    <td>History Assignment</td>
+                    <td>March 20, 2025</td>
+                    <td>Pass</td>
+                </tr>
+            </table>
+    </div>
+</body>
+</html>

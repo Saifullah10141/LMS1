@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            height: 100vh;
+            background-color: white;
+            color: #000;
+            font-family: Arial, sans-serif;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #003366;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #004080;
+            text-align: center;
+            border-radius: 5px;
+        }
+        .sidebar a:hover {
+            background-color: #0066cc;
+        }
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+        .header {
+            background-color: #2980b9;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            const params = new URLSearchParams(window.location.search);
+            const subject = params.get("subject");
+            const teacher = params.get("teacher") || "Unknown Teacher";
+            const attendancePercentage = params.get("attendance") || "N/A";
+            
+            document.getElementById("subject-title").innerText = subject;
+            document.getElementById("teacher-name").innerText = teacher;
+            document.getElementById("attendance-percentage").innerText = attendancePercentage + "%";
+        }
+    </script>
+</head>
+<body>
+    <div class="sidebar">
+           <a href="dashboard.html">Dashboard</a>
+        <a href="enroll_subjects.html">Enrolled Subjects</a>
+        <a href="student/assignment.html">Assignment</a>
+        <a href="student/quiz.html">Quiz</a>
+        <a href="contact_us.html">Contact Us</a>
+        <a href="logout.html">Logout</a>
+    </div>
+    <div class="main-content">
+        <div class="header">
+            <h2>Welcome, <span id="username">[Student Name]</span>!</h2>
+        </div>
+        <h1>Attendance for <span id="subject-title"></span></h1>
+        <h3>Instructor: <span id="teacher-name"></span></h3>
+        <h3>Attendance Percentage: <span id="attendance-percentage"></span></h3>
+        <table>
+            <tr>
+                <th>Lecture #</th>
+                <th>Date</th>
+                <th>Start Time</th>
+                <th>Status</th>
+            </tr>
+            <tr><td>1</td><td>19-02-2025</td><td>05:45:00</td><td>A</td></tr>
+            <tr><td>2</td><td>19-02-2025</td><td>17:00:00</td><td>A</td></tr>
+            <tr><td>3</td><td>21-02-2025</td><td>14:00:00</td><td>A</td></tr>
+            <tr><td>4</td><td>21-02-2025</td><td>02:45:00</td><td>A</td></tr>
+            <tr><td>5</td><td>26-02-2025</td><td>17:00:00</td><td>P</td></tr>
+            <tr><td>6</td><td>26-02-2025</td><td>05:45:00</td><td>P</td></tr>
+            <tr><td>7</td><td>28-02-2025</td><td>14:00:00</td><td>P</td></tr>
+            <tr><td>8</td><td>28-02-2025</td><td>02:45:00</td><td>P</td></tr>
+            <tr><td>9</td><td>05-03-2025</td><td>17:00:00</td><td>P</td></tr>
+            <tr><td>10</td><td>05-03-2025</td><td>05:45:00</td><td>P</td></tr>
+            <tr><td>11</td><td>14-03-2025</td><td>14:00:00</td><td>P</td></tr>
+            <tr><td>12</td><td>14-03-2025</td><td>02:40:00</td><td>P</td></tr>
+            <tr><td>13</td><td>18-03-2025</td><td>02:45:00</td><td>P</td></tr>
+        </table>
+    </div>
+</body>
+</html>

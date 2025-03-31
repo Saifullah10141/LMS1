@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View & Delete Courses</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            background-color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #003366;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            position: fixed;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #004080;
+            text-align: center;
+            border-radius: 5px;
+        }
+        .sidebar a:hover {
+            background-color: #0066cc;
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+            margin-left: 250px;
+        }
+
+        .header {
+            background-color: #2980b9;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .table-container {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .search-container {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .search-container input {
+            width: 80%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #004080;
+            color: white;
+        }
+
+        .delete-btn {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .delete-btn:hover {
+            background-color: darkred;
+        }
+
+        #total-courses {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="manage_courses.html">Manage Courses</a>
+        <a href="manage_students.html">Manage Students</a>
+        <a href="manage_instructors.html">Manage Instructors</a>
+        <a href="contact_us.html">Contact Us</a>
+        <a href="logout.html">Logout</a>
+    </div>
+
+    <div class="content">
+        <div class="header">
+            <h2>Welcome, <span id="username">[Course Coordinator Name]</span>!</h2>
+        </div>
+
+        <div class="table-container">
+            <h3>Enrolled Courses</h3>
+            <div class="search-container">
+                <input type="text" id="searchBox" onkeyup="searchCourses()" placeholder="Search for courses...">
+            </div>
+            <table>
+                <p id="total-courses">Total Courses: <span id="course-count">2</span></p>
+                <thead>
+                    <tr>
+                        <th>Course Name</th>
+                        <th>Course Code</th>
+                        <th>Credit Hours (Theory)</th>
+                        <th>Credit Hours (Practical)</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="course-list">
+                    <tr>
+                        <td>Mathematics</td>
+                        <td>MATH101</td>
+                        <td>3</td>
+                        <td>1</td>
+                        <td><button class="delete-btn" onclick="deleteCourse(this)">Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td>Physics</td>
+                        <td>PHYS102</td>
+                        <td>3</td>
+                        <td>1</td>
+                        <td><button class="delete-btn" onclick="deleteCourse(this)">Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function deleteCourse(button) {
+            let confirmDelete = confirm("Are you sure you want to delete this course?");
+            if (confirmDelete) {
+                let row = button.parentNode.parentNode;
+                row.parentNode.removeChild(row);
+                updateCourseCount();
+                alert("Course deleted successfully!");
+            }
+        }
+
+        function searchCourses() {
+            let input = document.getElementById("searchBox").value.toLowerCase();
+            let table = document.getElementById("course-list");
+            let rows = table.getElementsByTagName("tr");
+            let count = 0;
+            
+            for (let i = 0; i < rows.length; i++) {
+                let cells = rows[i].getElementsByTagName("td");
+                let found = false;
+                for (let j = 0; j < cells.length - 1; j++) {
+                    if (cells[j].innerText.toLowerCase().includes(input)) {
+                        found = true;
+                        break;
+                    }
+                }
+                rows[i].style.display = found ? "" : "none";
+                if (found) count++;
+            }
+            document.getElementById("course-count").innerText = count;
+        }
+
+        function updateCourseCount() {
+            let table = document.getElementById("course-list");
+            let visibleRows = table.querySelectorAll("tr:not([style*='display: none'])").length;
+            document.getElementById("course-count").innerText = visibleRows;
+        }
+    </script>
+</body>
+</html>

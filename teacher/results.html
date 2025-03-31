@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            height: 100vh;
+            background-color: white;
+            font-family: Arial, sans-serif;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #003366;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            position: fixed;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #004080;
+            text-align: center;
+            border-radius: 5px;
+        }
+        .sidebar a:hover {
+            background-color: #0066cc;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+            margin-left: 250px;
+        }
+        .header {
+            background-color: #2980b9;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .form-container {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            border: none;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .results-table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 100%;
+            display: none;
+        }
+        .results-table th, .results-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        .results-table th {
+            background-color: #2980b9;
+            color: white;
+        }
+        .edit-button, .delete-button {
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            color: white;
+        }
+        .edit-button {
+            background-color: #ffc107;
+        }
+        .delete-button {
+            background-color: #dc3545;
+        }
+        .edit-button:hover {
+            background-color: #e0a800;
+        }
+        .delete-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="course_content.html">Course Contents</a>
+        <a href="assignments.html">Assignments</a>
+        <a href="quizzes.html">Quizzes</a>
+        <a href="attendance.html">Attendance</a>
+        <a href="enroll_students.html">Enroll Students</a>
+        <a href="results.html">Results</a>
+        <a href="contact_us.html">Contact Us</a>
+        <a href="logout.html">Logout</a>
+    </div>
+
+    <div class="content">
+        <div class="header">
+            <h2>Welcome, <span id="username">[Instructor Name]</span>!</h2>
+        </div>
+
+        <div class="form-container">
+            <h3>Upload Student Results</h3> <br>
+            <label for="course">Select Course:</label>
+            <select id="course" style="margin:10px;" onchange="fetchResults()">
+                <option value="">Select Course</option>
+                <option value="Math">Math</option>
+                <option value="Science">Science</option>
+                <option value="History">History</option>
+            </select>
+
+            <label for="registration">Registration No. :</label>
+            <input type="text" id="registration" placeholder="Enter registration number" style="margin:10px;">
+            <label for="mid">Mid Marks:</label>
+            <input type="text" id="mid" placeholder="Enter Mid Marks">
+            <label for="final">Final Marks:</label>
+            <input type="text" id="final" placeholder="Enter Final Marks">
+            <label for="sessional">Sessional Marks:</label>
+            <input type="text" id="sessional" placeholder="Enter Sessional Marks">
+            <label for="practical">Practical Marks:</label>
+            <input type="text" id="practical" placeholder="Enter Practical Marks">
+
+            <button onclick="uploadResult()">Upload Result</button>
+        </div>
+
+        <h3>Uploaded Results</h3>
+        <table class="results-table" id="results-table">
+            <thead>
+                <tr>
+                    <th>Registration No.</th>
+                    <th>Mid</th>
+                    <th>Final</th>
+                    <th>Sessional</th>
+                    <th>Practical</th>
+                    <th>Total Obtained</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Results will be inserted dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function fetchResults() {
+            let course = document.getElementById("course").value;
+            let resultsTable = document.getElementById("results-table");
+            let tbody = resultsTable.getElementsByTagName("tbody")[0];
+
+            if (!course) {
+                resultsTable.style.display = "none";
+                return;
+            }
+
+            resultsTable.style.display = "table";
+            tbody.innerHTML = "<tr><td colspan='6'>Loading...</td></tr>";
+
+            setTimeout(() => {
+                tbody.innerHTML = `
+                    <tr><td>12345</td><td>20</td><td>40</td><td>15</td><td>10</td><td>85</td>
+                        <td> 
+                        <button class="delete-button" onclick="deleteResult(this)">Delete</button></td></tr>
+                    <tr><td>67890</td><td>25</td><td>45</td><td>18</td><td>12</td><td>100</td>
+                        <td>
+                        <button class="delete-button" onclick="deleteResult(this)">Delete</button></td></tr>
+                `;
+            }, 500);
+        }
+
+        function uploadResult() {
+            alert("Result uploaded successfully!");
+        }
+
+        function deleteResult(button) {
+            button.parentElement.parentElement.remove();
+            alert("Result deleted successfully!");
+        }
+    </script>
+</body>
+</html>
